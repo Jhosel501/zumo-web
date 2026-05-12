@@ -1,0 +1,446 @@
+:root {
+    --zumo-gradient: linear-gradient(135deg, #FF5B37 0%, #E93E71 50%, #9D38D3 100%);
+    --fondo: #08080A;
+    --texto: #FFFFFF;
+    --texto-dim: #666670;
+    --error: #FF5B37;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto);
+    /* Para asegurar que el contenido siempre ocupe toda la altura de la pantalla, incluso en móviles con barras de navegación dinámicas */
+    min-height: 100vh;  
+    min-height: 100dvh; /* Para navegadores que soporten la unidad dinámica */
+    overflow-y: auto;
+    overflow-x: hidden; /* Ocultamos el horizontal por seguridad para que la web no "baile" hacia los lados */
+}
+
+/* Contenedor inmersivo */
+.pantalla-completa {
+    display: flex;
+    flex-direction: column;
+    
+    min-height: 100vh; 
+    min-height: 100dvh;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 30px 25px 40px 25px;
+    position: relative;
+}
+
+/* Logo pequeño arriba a la izquierda */
+.header-logo {
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: -1px;
+    background: var(--zumo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+}
+
+/* Título masivo */
+.hero-section {
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    text-transform: uppercase;
+}
+
+.nombre-invitador {
+    background: var(--zumo-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.cluster-info {
+    color: var(--texto-dim);
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Formulario Edge-to-Edge */
+.formulario {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-grupo label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--texto-dim);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
+
+.input-inmersivo {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #222;
+    color: white;
+    padding: 12px 0;
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-inmersivo:focus {
+    border-bottom-color: #E93E71;
+}
+
+/* Botón masivo anclado abajo */
+.boton-contenedor {
+    width: 100%;
+}
+
+.boton-join {
+    width: 100%;
+    background: var(--zumo-gradient);
+    color: white;
+    border: none;
+    padding: 22px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(233, 62, 113, 0.3);
+}
+
+/* Estado de error */
+.error-msg {
+    display: none;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.error-msg h2 {
+    font-size: 24px;
+    color: var(--error);
+    margin-bottom: 10px;
+}
+
+/* --- COMPONENTE TELÉFONO (Estilo Tinder/WhatsApp) --- */
+.wrapper-telefono {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #222;
+    transition: border-color 0.3s;
+}
+
+/* focus-within hace que la línea se ilumine al tocar el input interior */
+.wrapper-telefono:focus-within {
+    border-bottom-color: #E93E71; 
+}
+
+.prefijo-fijo {
+    font-size: 18px;
+    color: var(--texto-dim); /* El tono gris de tu paleta */
+    margin-right: 12px;
+    padding: 12px 0;
+    user-select: none; /* Evita que el texto se seleccione por accidente */
+    font-weight: 600;
+}
+
+.input-telefono-derecha {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 12px 0;
+    font-size: 18px;
+    outline: none;
+}
+
+/* Cambiamos el color del placeholder para que encaje */
+.input-telefono-derecha::placeholder {
+    color: #444;
+}
+
+/* =========================================
+   PANTALLA ERROR - CÓDIGO USADO O ERRÓNEO
+   ========================================= */
+.error-contenedor-espia {
+    background-color: #121212; /* Un tono más profundo de negro */
+    border: 2px solid #FF7E00; /* Borde con el naranja de Zumo */
+    border-radius: 20px;
+    padding: 40px 24px;
+    max-width: 90%;
+    width: 380px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 126, 0, 0.2); /* Resplandor naranja suave */
+    margin: 0 auto;
+}
+
+.icono-alerta {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.titulo-espia {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.texto-espia {
+    color: #999999;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.caja-mision {
+    background-color: rgba(255, 126, 0, 0.1); /* Fondo naranja muy transparente */
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.texto-destacado {
+    color: #FF7E00; /* Naranja Zumo para la frase clave */
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+}
+
+/* =========================================
+   ANIMACIÓN ICONO ERROR (TEMBLOR)
+   ========================================= */
+.icono-svg-alerta {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Un pequeño retraso para que la cara aparezca primero */
+    animation: negacion 0.4s ease-in-out;
+}
+
+/* Animación de "cabeza diciendo que no" */
+@keyframes negacion {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+/* =========================================
+   ESTILOS TEXTO REDES SOCIALES (ERROR)
+   ========================================= */
+.separador-mision {
+    border: none;
+    border-top: 1px solid rgba(255, 126, 0, 0.2);
+    margin: 15px 0;
+}
+
+.texto-redes {
+    color: #cccccc;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.texto-redes a {
+    color: #FF7E00;
+    text-decoration: none;
+    font-weight: 700;
+    transition: opacity 0.2s ease;
+}
+
+.texto-redes a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* =========================================
+   PANTALLA DE ÉXITO Y TARJETAS DESCARGA
+   ========================================= */
+#ui-exito {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    align-items: center; /* Centramos todo el contenido */
+}
+
+.gradient-text-exito {
+    background: linear-gradient(90deg, #FF512F 0%, #DD2476 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.texto-bienvenida {
+    color: #cccccc;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 500px;
+}
+
+/* Contenedor de las tarjetas (Flex horizontal que stackea en móvil) */
+.contenedor-descargas {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+    justify-content: center;
+}
+
+/* Estilo Base de las Tarjetas */
+.tarjeta-descarga {
+    background-color: #1a1a1a;
+    width: 100%;
+    max-width: 280px;
+    height: 350px; /* Tarjetas verticales */
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    border: 2px solid #333; /* Borde oscuro por defecto */
+}
+
+
+
+.nombre-os {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+/* Estilos Específicos ANDROID (Activa y Brillante) */
+.tarjeta-android {
+    border-color: #FF7E00; /* Usamos el naranja de Zumo */
+    /* Brillo naranja suave, similar al que pediste en image_96d3d3.png */
+    box-shadow: 0 0 30px rgba(255, 126, 0, 0.3);
+}
+
+.tarjeta-android:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 50px rgba(255, 126, 0, 0.5);
+}
+
+.boton-tarjeta {
+    background: linear-gradient(135deg, #FF7E00 0%, #E02C73 100%);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+
+/* Estilos Específicos iOS (Apagada y Faded) */
+.tarjeta-ios {
+    border-color: #444; /* Borde gris */
+    opacity: 0.3; /* Efecto apagado global */
+    cursor: not-allowed;
+    position: relative; /* Para posicionar el texto encima */
+}
+
+.tarjeta-ios .nombre-os {
+    color: #666;
+}
+
+.badge-proximamente-tarjeta {
+    background-color: #444;
+    color: #ffffff;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    position: absolute;
+    top: 50%; /* Centramos el texto escrito encima */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+/* =========================================
+   RESPONSIVE PARA MÓVILES (Tarjetas horizontales)
+   ========================================= */
+@media (max-width: 600px) {
+    .contenedor-descargas {
+        /* Forzamos que se mantengan en horizontal */
+        flex-direction: row;
+        gap: 12px; /* Reducimos el hueco entre ellas */
+        width: 100%;
+        padding: 0;
+    }
+
+    .tarjeta-descarga {
+        /* Hacemos las tarjetas más compactas */
+        height: 220px;
+        padding: 15px;
+        flex: 1; /* Para que ambas ocupen exactamente el 50% del espacio disponible */
+    }
+
+    .icono-os-svg {
+        /* Reducimos el tamaño de los logos */
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .nombre-os {
+        /* Reducimos la fuente del título */
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+
+    .boton-tarjeta {
+        /* Botón más pequeño para que quepa en una sola línea */
+        font-size: 10px;
+        padding: 8px 10px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .badge-proximamente-tarjeta {
+        /* Reducimos la etiqueta de "Próximamente" */
+        font-size: 9px;
+        padding: 4px 8px;
+    }
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Zumo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <div class="pantalla-completa" id="ui-principal">
+        <div class="header-logo">ZUMO</div>
+
+        <div class="hero-section" id="invitacion-info">
+            <h1 id="texto-principal">Cargando...</h1>
+            <div class="cluster-info" id="cluster-name">Zaragoza Live</div>
+        </div>
+
+        <form class="formulario" id="form-registro" onsubmit="handleRegistro(event)">
+            <div class="campo-grupo">
+                <label>Nombre de usuario</label>
+                <input type="text" id="input-username" class="input-inmersivo" placeholder="@tu_usuario" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Email</label>
+                <input type="email" id="input-email" class="input-inmersivo" placeholder="hola@ejemplo.com" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Password</label>
+                <input type="password" id="input-password" class="input-inmersivo" placeholder="••••••••" required>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Teléfono móvil</label>
+                <div class="wrapper-telefono">
+                    <span class="prefijo-fijo">🇪🇸 +34</span>
+                    <input type="tel" id="input-telefono" class="input-telefono-derecha" placeholder="600 000 000" required>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Fecha de nacimiento</label>
+                <input type="date" id="input-fecha-nacimiento" class="input-inmersivo" required>
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                <div class="g-recaptcha" data-sitekey="6LdphM4sAAAAAHAJ8oVRueaXQaIilpybSteXVD-5"></div>
+            </div>
+
+            <div class="boton-contenedor">
+                <button type="submit" class="boton-join">Unirme ahora</button>
+            </div>
+        </form>
+        <div class="formulario" id="form-otp" style="display: none;">
+            <div class="hero-section">
+                <h1 style="font-size: 28px;">Verifica tu identidad</h1>
+                <div class="cluster-info" style="color: #E93E71;">Te hemos enviado un código al email</div>
+            </div>
+
+            <div class="campo-grupo">
+                <label>Código secreto (6 dígitos)</label>
+                <input type="text" id="input-otp" class="input-inmersivo" placeholder="123456" maxlength="6" style="text-align: center; font-size: 24px; letter-spacing: 5px;" required>
+            </div>
+
+            <div class="boton-contenedor">
+                <button type="button" class="boton-join" id="btn-verificar" onclick="handleVerificarOTP()">Verificar y Entrar</button>
+            </div>
+            
+            <p style="text-align: center; color: var(--texto-dim); font-size: 12px; margin-top: 15px;">
+                El código caduca en 10 minutos.
+            </p>
+        </div>
+    </div>
+
+    <div class="pantalla-completa error-msg" id="ui-error" style="display: none;">
+        <div class="error-contenedor-espia">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="icono-svg-alerta">
+            <g fill="none" stroke="#FF7E00" stroke-width="6" stroke-linecap="round">
+                <circle cx="50" cy="50" r="40" />
+                <line x1="35" y1="40" x2="35" y2="48" />
+                <line x1="65" y1="40" x2="65" y2="48" />
+                <path d="M 30 75 Q 50 60 70 75" />
+            </g>
+            </svg>
+
+            <h2 class="titulo-espia">Código erróneo</h2>
+            <p class="texto-espia">Parece que este enlace ha caducado, ha sido exprimido al máximo o nunca llegó a existir.</p>
+            
+            <div class="caja-mision">
+                <p class="texto-destacado">Busca a un infiltrado en tu universidad que tenga un código activo.</p>
+
+                <hr class="separador-mision">
+                <p class="texto-redes">💡 Pista: A veces soltamos códigos sorpresa en <a href="https://x.com/ZumoAppZGZ" target="_blank">nuestro Twitter</a>. ¡Atento!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pantalla-completa" id="ui-exito" style="display: none;">
+
+        <div class="hero-section" style="text-align: center; margin-top: 40px; margin-bottom: 50px;">
+            <h1 class="gradient-text-exito">¡BIENVENIDO!</h1>
+            <p class="texto-bienvenida">Descarga la app, inicia sesión e invita a tus amigos.</p>
+        </div>
+
+        <div class="contenedor-descargas">
+            
+            <a href="https://drive.google.com/file/d/1_GVFmOBi3wJE7dNPK1AQ3Zld59FVg8Cc/view?usp=sharing" class="tarjeta-descarga tarjeta-android" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="icono-os-svg" fill="#3DDC84">
+                    <path d="M420.22 84.02L459.2 16.5c3.08-5.34 1.25-12.18-4.08-15.25-5.32-3.08-12.15-1.25-15.22 4.08L399.73 74.9c-33.85-15.68-71.97-24.38-111.73-24.38-39.75 0-77.88 8.7-111.73 24.38L136.1 5.33c-3.08-5.33-9.9-7.16-15.22-4.08-5.33 3.08-7.16 9.9-4.08 15.25l38.98 67.52C63.53 133.52 0 236.4 0 355.72h576c0-119.32-63.53-222.2-155.78-271.7zm-255.45 204.3c-15.2 0-27.5-12.3-27.5-27.5s12.3-27.5 27.5-27.5 27.5 12.3 27.5 27.5-12.3 27.5-27.5 27.5zm183.1 0c-15.2 0-27.5-12.3-27.5-27.5s12.3-27.5 27.5-27.5 27.5 12.3 27.5 27.5-12.3 27.5-27.5 27.5z"/>
+                </svg>
+                <span class="nombre-os">Android</span>
+                <div class="boton-tarjeta">Descargar</div>
+            </a>
+
+            <div class="tarjeta-descarga tarjeta-ios">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icono-os-svg" fill="#ffffff">
+                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                </svg>
+                <span class="nombre-os">iOS</span>
+                <div class="badge-proximamente-tarjeta">Próximamente</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
