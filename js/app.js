@@ -67,8 +67,15 @@ window.onload = async () => {
         const nombreInvitador = data.perfiles?.username || 'Un amigo';
         const nombreCiudad = data.clusteres?.ciudades?.nombre || 'Tu ciudad';
 
-        document.getElementById('texto-principal').innerHTML =
-            `<span class="nombre-invitador">${nombreInvitador}</span> te invita a entrar`;
+        // Mostramos el nombre del invitador de manera segura
+        const span = document.createElement('span');
+        span.className = 'nombre-invitador';
+        span.textContent = nombreInvitador;
+
+        // Reemplazamos el contenido del párrafo de bienvenida de forma segura
+        const p = document.getElementById('texto-principal');
+        p.replaceChildren(span, document.createTextNode(' te invita a entrar'));
+
         document.getElementById('cluster-name').innerText = `📍 ${nombreCiudad}`;
 
     } catch (err) {
