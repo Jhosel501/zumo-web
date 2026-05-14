@@ -60,7 +60,7 @@ window.onload = async () => {
             return;
         }
 
-        // GUARDAMOS EL CLÚSTER
+        // GUARDAMOS el clusterId y el uuid del invitador en variables globales para usarlas luego en el registro
         clusterIdActual = data.cluster_id;
         uuidInvitadorActual = data.creador_id;
 
@@ -160,7 +160,10 @@ async function handleRegistro(e) {
         const { data: otpData, error: otpError } = await clienteSupabase.functions.invoke('hub-pro-auth', {
             body: { 
                 action: 'request', 
-                payload: { email: email },
+                payload: { 
+                    email: email,
+                    username: usernameLimpio // <-- AÑADIMOS EL USERNAME AL PAQUETE
+                },
                 recaptcha_token: captchaResponse  // TOKEN DEL CAPTCHA
             }
         });
