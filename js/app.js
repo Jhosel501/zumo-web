@@ -118,6 +118,9 @@ async function handleRegistro(e) {
 
     if (usernameLimpio.length < 3) return alert("El nombre de usuario debe tener al menos 3 letras.");
     
+    const regexUsername = /^[a-z0-9_.]{3,20}$/;
+    if (!regexUsername.test(usernameLimpio)) return alert("El nombre de usuario contiene caracteres no permitidos. Solo se aceptan letras, números, puntos y guiones bajos.");
+
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!regexEmail.test(email)) return alert("Por favor, introduce un email válido.");
 
@@ -263,6 +266,3 @@ async function handleVerificarOTP() {
         btn.disabled = false;
     }
 }
-
-    
-
