@@ -18,6 +18,11 @@ window.onload = async () => {
     const uiPrincipal = document.getElementById('ui-principal');
     const uiError = document.getElementById('ui-error');
 
+    // Validador (Whitelist) en tiempo real: Solo permite introducir números en el OTP
+    document.getElementById('input-otp')?.addEventListener('input', function (e) {
+        this.value = this.value.replace(/\D/g, ''); // Elimina cualquier carácter que no sea un dígito
+    });
+
     if (!code) {
         uiPrincipal.style.display = 'none';
         uiError.style.display = 'block';
@@ -195,8 +200,9 @@ async function handleVerificarOTP() {
     const btn = document.getElementById('btn-verificar');
     const textoOriginal = btn.innerText;
 
-    if (otpInput.length !== 6) {
-        return alert("El código debe tener 6 dígitos.");
+    // Validación estricta antes de enviar: Exactamente 6 dígitos numéricos
+    if (!/^\d{6}$/.test(otpInput)) {
+        return alert("El código debe estar formado por exactamente 6 números.");
     }
 
     btn.innerText = "Verificando...";
